@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ClevConWebUI.Models.Host>
+
+@{
+    ViewBag.Title = "Hosts";
+}
+
+<div class="container body-content">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.ActionLink("Add New Contact", "Create", null, new { @class = "btn btn-lg btn-primary" })
+                </div>
+                <div class="col-md-4 text-center">
+                    <h2 class="text-center">Host Contact List</h2>
+                    <br />
+                </div>
+                <div class="col-md-4 text-right">
+                    <a class="btn btn-default" href="../Home/Index">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Home
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center">
+                @using (Html.BeginForm())
+            {
+                    <p>
+                        Name: @Html.TextBox("SearchString")
+                        <input type="submit" value="Search" />
+                    </p>
+                }
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="table table-responsive">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Company)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </th>
+                        <th>Admin</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.HostId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.HostId })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            @Html.ActionLink("Back to Visitor Registration", "Index", "Visitors", null, new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    <br />
+    <footer>
+        <hr />
+        <p>&copy; @DateTime.Now.Year - <a href="http://nagyrs.co.uk" target="_blank">Reka S Nagy</a> - This is a non-commercial demo project</p>
+    </footer>
+
+</div>

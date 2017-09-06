@@ -1,0 +1,44 @@
+﻿@model ClevConWebUI.Models.Host
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container body-content">
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                   <h3>Are you sure you want to delete <strong>@Model.Name</strong> from the contact list?</h3> 
+                </div>
+                <div class="panel-body">
+                    <br />
+                    <h4> Deleting a host means that you lose all visitor information connected to this person.</h4>
+                    <h3>Do you want to continue?</h3>
+                    <br />
+                </div>
+                <div class="panel-footer">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br />
+
+
+    @*<footer>
+            <hr />
+            <p>&copy; @DateTime.Now.Year - <a href="http://nagyrs.co.uk" target="_blank">Reka S Nagy</a> - This is a non-commercial demo project</p>
+        </footer>*@
+
+</div>

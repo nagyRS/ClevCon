@@ -1,0 +1,68 @@
+﻿@model ClevConWebUI.Models.Visitor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container body-content">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2>Details of @Model.Name</h2>
+        </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Host.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Host.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Expected)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Expected)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Notes)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Notes)
+                    </dd>
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Arrived)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Arrived)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Departed)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Departed)
+                    </dd>
+                </dl>
+            </div>
+
+        <div class="panel-footer">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.VisitorId }, new { @class="btn btn-primary"})
+                @Html.ActionLink("Back to List", "Index", "Visitors", new { @class = "btn btn-success" })
+                @Html.ActionLink("Delete", "Delete", new { id = Model.VisitorId }, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@model ClevConWebUI.Models.Host
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container body-content">
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            <h2>@Model.Name</h2>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Company)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Company)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Phone)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-sm-6">
+                    <h3>How to Contact Hosts</h3>
+                    <br />
+                    <p>
+                        Please follow this short guide in order to contact hosts in a quick and professional manner:
+                    </p>
+
+                    <ul>
+                        <li>
+                            Always try to call first. Leave a voicemail if there is no answer
+                        </li>
+                        <li>
+                            Send an email (even if you left a voicemail)
+                        </li>
+                        <li>
+                            If there is no response within the next 15 minutes contact the company's reception and leave a message there
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+
+            @Html.ActionLink("Edit This Contact", "Edit", new { id = Model.HostId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Back to Visitor List", "Index", "Visitors", null, new { @class = "btn btn-success" })
+
+
+        </div>
+    </div>
+</div>

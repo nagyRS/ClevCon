@@ -1,0 +1,166 @@
+﻿@*@model IEnumerable<ClevConWebUI.Models.Visitor>*@
+
+@model PagedList.IPagedList<ClevConWebUI.Models.Visitor>
+@using PagedList.Mvc;
+@*<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />*@
+
+@{
+    ViewBag.Title = "Visitors";
+}
+
+
+<div class="container body-content">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.ActionLink("Register New Visitor", "Create", null, new { @class = "btn btn-lg btn-primary" })
+                </div>
+                <div class="col-md-4 text-center">
+                    <h1>Visitor List</h1>
+                    <br />
+                </div>
+                <div class="col-md-4 text-right">
+                    <a class="btn btn-default" href="../Home/Index">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Home
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="text-center">
+                @using (Html.BeginForm("Index", "Visitors", FormMethod.Get))
+            {
+                    <p>
+                        Search by Name:<br /> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                        <input type="submit" value="Search" />
+                    </p>
+                }
+
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="table table-responsive text-center">
+                <table class="table table-bordered table-hover">
+                    <tr class="text-center">
+                        <th>
+                            @Html.ActionLink("Name of Visitor", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th>
+                            Name of Host
+                        </th>
+                        <th>
+                            @Html.ActionLink("Expected", "Index", new { sortOrder = ViewBag.DateSortParam, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th>
+                            Notes
+                            @*@Html.DisplayNameFor(model => model.Notes)*@
+                        </th>
+                        <th>
+                            Check In
+                        </th>
+                        <th>
+                            Arrived
+                            @*@Html.DisplayNameFor(model => model.Arrived)*@
+                        </th>
+                        <th>Contact</th>
+
+                        <th>
+                            Check out
+                        </th>
+                        <th>
+                            Departed
+                            @*@Html.DisplayNameFor(model => model.Departed)*@
+                        </th>
+
+                        <th>Admin</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Host.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Expected)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Notes)
+                            </td>
+                            <td>
+                                @if (item.Expected == DateTime.Now.Date)
+                                {
+                                    @Ajax.ActionLink("Check In", "Checkin", new { id = item.VisitorId }, null, new { @class = "btn btn-primary" })
+
+                                }
+                                @if (item.Expected != DateTime.Now.Date)
+                                {
+                                    <a href="#" class="btn btn-primary disabled">Check In</a>
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Arrived)
+                            </td>
+
+                            <td>
+                                @Ajax.ActionLink("Contact Host", "Details", "Hosts", new { id = item.HostId }, null, new { @class = "btn btn-success" })
+                            </td>
+
+                            <td>
+                                @if (item.Expected == DateTime.Now.Date)
+                            {
+                                @Ajax.ActionLink("Check out", "Checkout", "Visitors", new { id = item.VisitorId }, null, new { @class = "btn btn-primary" })
+                            }
+
+                            @if (item.Expected != DateTime.Now.Date)
+                            {
+                                <a href="#" class="btn btn-primary disabled">Check Out</a>
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Departed)
+                        </td>
+
+                        <td class="text-center">
+                            @Html.ActionLink("Edit Visitor", "Edit", new { id = item.VisitorId })
+
+                        </td>
+                    </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-4">
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+           new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+
+                <div class="col-sm-4 col-sm-offset-4 text-right">
+                    @Html.ActionLink("Find All Hosts", "Index", "Hosts", null, new { @class = "btn btn-success" })
+                </div>
+
+
+                
+
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+            <hr />
+            <p>&copy; @DateTime.Now.Year - <a href="http://nagyrs.co.uk" target="_blank">Reka S Nagy</a> - This is a non-commercial demo project</p>
+        </footer>
+
+</div>
